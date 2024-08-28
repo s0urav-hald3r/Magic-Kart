@@ -47,9 +47,18 @@ class ProductCard extends StatelessWidget {
                     style: GoogleFonts.poppins(fontSize: 14.sp),
                   ),
                   Gap(12.h),
-                  Text(
-                    '₹139.30',
-                    style: GoogleFonts.poppins(fontSize: 12.sp),
+                  Row(
+                    children: [
+                      Text(
+                        '₹139.30',
+                        style: GoogleFonts.poppins(fontSize: 12.sp),
+                      ),
+                      Gap(12.w),
+                      Text(
+                        '⭐ 4.1',
+                        style: GoogleFonts.poppins(fontSize: 12.sp),
+                      ),
+                    ],
                   ),
                 ],
               ),

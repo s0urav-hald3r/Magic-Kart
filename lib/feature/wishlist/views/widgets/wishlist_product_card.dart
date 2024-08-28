@@ -50,9 +50,18 @@ class WishlistProductCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        '₹139.30',
-                        style: GoogleFonts.poppins(fontSize: 12.sp),
+                      Row(
+                        children: [
+                          Text(
+                            '₹139.30',
+                            style: GoogleFonts.poppins(fontSize: 12.sp),
+                          ),
+                          Gap(12.w),
+                          Text(
+                            '⭐ 4.1',
+                            style: GoogleFonts.poppins(fontSize: 12.sp),
+                          ),
+                        ],
                       ),
                       InkWell(
                         onTap: () {},
