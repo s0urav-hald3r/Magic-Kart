@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:magickart/bindings/general_bindings.dart';
+import 'package:magickart/feature/navigation_bar.dart';
 import 'package:magickart/utils/constants/colors.dart';
 import 'package:magickart/utils/helper/navigation.dart';
 
