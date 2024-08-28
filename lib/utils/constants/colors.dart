@@ -6,7 +6,7 @@ class XColor {
   // App specific colors
   static const Color scaffoldLigthBackgroundColor = Color(0xFFFFFFFF);
   static const Color scaffoldDarkBackgroundColor = Color(0xFF262626);
-  static const Color primaryColor = Color.fromARGB(251, 109, 244, 158);
+  static const Color primaryColor = Color(0xFFADE1DD);
 
 // Neutral Shades
   static const Color black = Color(0xFF000000);

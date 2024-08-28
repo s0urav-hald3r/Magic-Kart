@@ -33,7 +33,7 @@ class _NavigationBarViewState extends State<NavigationBarView> {
         alignment: Alignment.bottomCenter,
         children: [
           Obx(() => _buildBody()),
-          _buildBottomNavigationBar(),
+          Obx(() => _buildBottomNavigationBar()),
         ],
       ),
     );
@@ -51,6 +51,7 @@ class _NavigationBarViewState extends State<NavigationBarView> {
       data: NavigationBarThemeData(
         elevation: 10,
         indicatorColor: XColor.primaryColor,
+        backgroundColor: XColor.darkerGrey,
         labelTextStyle: WidgetStateProperty.all(
           GoogleFonts.poppins(fontSize: 12.sp, fontWeight: FontWeight.w500),
         ),
@@ -64,23 +65,23 @@ class _NavigationBarViewState extends State<NavigationBarView> {
           NavigationDestination(
               icon: Icon(
                 Icons.home,
-                size: 20.sp,
+                size: 24.sp,
               ),
               selectedIcon: Icon(
                 Icons.home,
-                size: 20.sp,
-                color: Colors.white,
+                size: 24.sp,
+                color: XColor.darkerGrey,
               ),
               label: 'Home'),
           NavigationDestination(
               icon: Icon(
-                Icons.settings,
-                size: 20.sp,
+                Icons.favorite,
+                size: 24.sp,
               ),
               selectedIcon: Icon(
-                Icons.settings,
-                size: 20.sp,
-                color: Colors.white,
+                Icons.favorite,
+                size: 24.sp,
+                color: XColor.darkerGrey,
               ),
               label: 'Wishlists'),
         ],
