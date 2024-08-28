@@ -36,6 +36,14 @@ dependencies:
   cupertino_icons: ^1.0.8
   # Used for splash screen
   flutter_native_splash:
+  # Used for varity of fonts style
+  google_fonts: ^4.0.4
+  # Used for state management method
+  get: ^4.6.5
+  # Used for spacing between widgets
+  gap: ^3.0.1
+  # Used for getting device details
+  flutter_screenutil: ^5.7.0
 
 dev_dependencies:
   flutter_test:
