@@ -46,6 +46,8 @@ dependencies:
   flutter_screenutil: ^5.7.0
   # Used for locally store data
   get_storage: ^2.1.1
+  # Used for API calls
+  dio: ^5.4.1
   skeletonizer: ^1.4.2
 
 dev_dependencies:
