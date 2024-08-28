@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:magickart/common/controllers/navigation_bar_controller.dart';
 import 'package:magickart/feature/home/views/home_view.dart';
+import 'package:magickart/feature/wishlist/views/wishlist_view.dart';
 import 'package:magickart/utils/constants/colors.dart';
 
 class NavigationBarView extends StatefulWidget {
@@ -42,7 +43,7 @@ class _NavigationBarViewState extends State<NavigationBarView> {
   Widget _buildBody() {
     return [
       const HomeView(),
-      Container(),
+      const WishlistView(),
     ][controller.screenIndex];
   }
 
