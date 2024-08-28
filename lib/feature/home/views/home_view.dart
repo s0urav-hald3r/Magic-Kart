@@ -20,7 +20,6 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   void initState() {
-    controller.getProducts();
     super.initState();
   }
 

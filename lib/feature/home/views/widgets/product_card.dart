@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:magickart/feature/home/controllers/home_controller.dart';
 import 'package:magickart/feature/product/models/product_model.dart';
 import 'package:magickart/feature/product/views/product_view.dart';
 import 'package:magickart/utils/constants/colors.dart';
@@ -14,7 +15,11 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigation.push(const ProductView()),
+      onTap: () {
+        HomeController.instance.isHomeLoading
+            ? null
+            : Navigation.push(ProductView(product: product!));
+      },
       child: Container(
         width: double.infinity,
         height: 100.h,
