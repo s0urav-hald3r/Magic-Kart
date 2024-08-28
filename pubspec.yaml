@@ -37,7 +37,7 @@ dependencies:
   # Used for splash screen
   flutter_native_splash:
   # Used for varity of fonts style
-  google_fonts: ^4.0.4
+  google_fonts: ^6.2.1
   # Used for state management method
   get: ^4.6.5
   # Used for spacing between widgets

@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:magickart/bindings/general_bindings.dart';
-import 'package:magickart/feature/navigation_bar.dart';
+import 'package:magickart/feature/navigation_bar_view.dart';
 import 'package:magickart/utils/constants/colors.dart';
 import 'package:magickart/utils/helper/navigation.dart';
 
@@ -28,9 +29,12 @@ class App extends StatelessWidget {
             splashColor: Colors.transparent,
             hoverColor: Colors.transparent,
             highlightColor: Colors.transparent,
-            appBarTheme: const AppBarTheme(
+            appBarTheme: AppBarTheme(
               backgroundColor: XColor.primaryColor,
               elevation: 5,
+              centerTitle: true,
+              titleTextStyle: GoogleFonts.poppins(
+                  fontSize: 20.sp, color: XColor.darkerGrey),
             ),
             primaryColor: XColor.primaryColor,
             scaffoldBackgroundColor: XColor.scaffoldDarkBackgroundColor,

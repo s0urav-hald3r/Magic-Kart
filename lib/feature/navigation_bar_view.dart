@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:magickart/common/controllers/navigation_bar_controller.dart';
+import 'package:magickart/feature/home/views/home_view.dart';
 import 'package:magickart/utils/constants/colors.dart';
 
 class NavigationBarView extends StatefulWidget {
@@ -28,20 +29,19 @@ class _NavigationBarViewState extends State<NavigationBarView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Obx(() => _buildBody()),
-          Obx(() => _buildBottomNavigationBar()),
-        ],
+    return SafeArea(
+      top: false,
+      bottom: false,
+      child: Scaffold(
+        body: Obx(() => _buildBody()),
+        bottomNavigationBar: Obx(() => _buildBottomNavigationBar()),
       ),
     );
   }
 
   Widget _buildBody() {
     return [
-      Container(),
+      const HomeView(),
       Container(),
     ][controller.screenIndex];
   }
