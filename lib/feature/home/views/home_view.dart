@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:magickart/feature/home/views/widgets/product_card.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -16,10 +17,13 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         title: const Text('Magic Kart'),
       ),
-      body: ListView.builder(
-        itemCount: 7,
-        padding: EdgeInsets.fromLTRB(12.w, 12.h, 12.w, 0),
-        itemBuilder: (index, context) => const ProductCard(),
+      body: Skeletonizer(
+        enabled: false,
+        child: ListView.builder(
+          itemCount: 7,
+          padding: EdgeInsets.fromLTRB(12.w, 12.h, 12.w, 0),
+          itemBuilder: (index, context) => const ProductCard(),
+        ),
       ),
     );
   }
