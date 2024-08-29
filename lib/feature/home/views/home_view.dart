@@ -81,6 +81,7 @@ class _HomeViewState extends State<HomeView> {
                   ],
                 ),
               ),
+
               Expanded(
                 child: ListView.builder(
                   itemCount: controller.isHomeLoading
@@ -92,6 +93,20 @@ class _HomeViewState extends State<HomeView> {
                       : ProductCard(product: controller.productList[index]),
                 ),
               ),
+
+              if (!controller.isHomeLoading && controller.productList.isEmpty)
+                Expanded(
+                  child: Text(
+                    'No data available',
+                    style: GoogleFonts.poppins(
+                      color: XColor.white,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: 2.sp,
+                      height: 0.0,
+                    ),
+                  ),
+                ),
             ],
           ),
         ),

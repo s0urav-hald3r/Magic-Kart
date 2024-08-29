@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:magickart/common/controllers/navigation_bar_controller.dart';
-import 'package:magickart/feature/home/controllers/home_controller.dart';
 import 'package:magickart/feature/home/views/home_view.dart';
 import 'package:magickart/feature/wishlist/views/wishlist_view.dart';
 import 'package:magickart/utils/constants/colors.dart';
@@ -17,19 +16,6 @@ class NavigationBarView extends StatefulWidget {
 
 class _NavigationBarViewState extends State<NavigationBarView> {
   final controller = NavigationBarController.instance;
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      makeAPIs();
-    });
-  }
-
-  Future<void> makeAPIs() async {
-    await HomeController.instance.getProducts();
-  }
 
   @override
   Widget build(BuildContext context) {

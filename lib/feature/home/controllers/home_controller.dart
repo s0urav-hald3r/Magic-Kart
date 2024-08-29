@@ -14,6 +14,12 @@ class HomeController extends GetxController {
   static HomeController get instance => Get.find();
 
   @override
+  void onInit() {
+    getProducts();
+    super.onInit();
+  }
+
+  @override
   void onReady() {
     super.onReady();
     _retrieveProducts();
