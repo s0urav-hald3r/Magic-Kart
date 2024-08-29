@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide FormData;
 import 'package:magickart/common/widgets/popup.dart';
 import 'package:magickart/data/repositorys/home_repo.dart';
@@ -56,19 +57,29 @@ class HomeController extends GetxController {
 
   final RxInt _page = 1.obs;
 
+  final searchController = TextEditingController();
+  final RxString _searchText = ''.obs;
+
   //  ---------------------------------* Variable End *--------------------------------
 
   //  ---------------------------------------------------------------------------------
 
   //  ---------------------------------* Getter Start *--------------------------------
 
-  List<ProductModel> get productList => _productList;
+  List<ProductModel> get productList => searchText.isEmpty
+      ? _productList
+      : _productList
+          .where(
+              (e) => e.title!.toLowerCase().contains(searchText.toLowerCase()))
+          .toList();
   List<ProductModel> get wishlistProducts => _wishlistProducts;
 
   bool get isHomeLoading => _isHomeLoading.value;
   bool get isWishlistLoading => _isWishlistLoading.value;
 
   int get page => _page.value;
+
+  String get searchText => _searchText.value;
 
   //  ---------------------------------* Getter End *----------------------------------
 
@@ -83,6 +94,8 @@ class HomeController extends GetxController {
   set isWishlistLoading(loading) => _isWishlistLoading.value = loading;
 
   set page(currentPage) => _page.value = currentPage;
+
+  set searchText(text) => _searchText.value = text;
 
   //  ---------------------------------* Setter End *----------------------------------
 

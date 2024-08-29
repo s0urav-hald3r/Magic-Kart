@@ -49,8 +49,8 @@ class _HomeViewState extends State<HomeView> {
                     Gap(12.w),
                     Expanded(
                       child: TextFormField(
-                        // controller: controller.search,
-                        // onChanged: (value) => controller.filterMods(),
+                        controller: controller.searchController,
+                        onChanged: (value) => controller.searchText = value,
                         style: GoogleFonts.poppins(
                           color: XColor.white,
                           fontSize: 12.sp,
