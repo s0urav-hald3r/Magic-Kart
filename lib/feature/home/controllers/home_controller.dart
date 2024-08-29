@@ -17,11 +17,6 @@ class HomeController extends GetxController {
   void onInit() {
     getProducts();
     super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
     _retrieveProducts();
   }
 
