@@ -67,7 +67,7 @@ lib
 
 ### 1. Clone the Repository
 
-- git clone <repository-url>
+- git clone https://github.com/s0urav-hald3r/Magic-Kart.git
 
 ### 2. Install Dependencies
 
