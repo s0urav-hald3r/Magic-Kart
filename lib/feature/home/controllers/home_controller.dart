@@ -54,6 +54,7 @@ class HomeController extends GetxController {
   final RxList<ProductModel> _wishlistProducts = <ProductModel>[].obs;
 
   final RxBool _isHomeLoading = false.obs;
+  final RxBool _isMoreLoading = false.obs;
   final RxBool _isWishlistLoading = false.obs;
 
   final RxInt _page = 1.obs;
@@ -76,6 +77,7 @@ class HomeController extends GetxController {
   List<ProductModel> get wishlistProducts => _wishlistProducts;
 
   bool get isHomeLoading => _isHomeLoading.value;
+  bool get isMoreLoading => _isMoreLoading.value;
   bool get isWishlistLoading => _isWishlistLoading.value;
 
   int get page => _page.value;
@@ -92,6 +94,7 @@ class HomeController extends GetxController {
   set wishlistProducts(products) => _wishlistProducts.value = products;
 
   set isHomeLoading(loading) => _isHomeLoading.value = loading;
+  set isMoreLoading(loading) => _isMoreLoading.value = loading;
   set isWishlistLoading(loading) => _isWishlistLoading.value = loading;
 
   set page(currentPage) => _page.value = currentPage;
@@ -130,14 +133,14 @@ class HomeController extends GetxController {
   }
 
   // Fetch products
-  Future<void> getProducts() async {
+  Future<void> getProducts({bool fetchMore = false}) async {
     // Start Loader
-    isHomeLoading = true;
+    fetchMore ? isMoreLoading = true : isHomeLoading = true;
 
     // Check for internet connectivity
     final isConnected = await TDeviceUtil.hasInternetConnection();
     if (!isConnected) {
-      isHomeLoading = false;
+      fetchMore ? isMoreLoading = false : isHomeLoading = false;
 
       // Show error popup if no internet connection
       XPopup.errorSnackbar(
@@ -150,7 +153,7 @@ class HomeController extends GetxController {
     productList = await HomeRepo.instance.getProducts(page);
 
     // Stop Loader
-    isHomeLoading = false;
+    fetchMore ? isMoreLoading = false : isHomeLoading = false;
   }
 
   //  ---------------------------------* Function End *--------------------------------
