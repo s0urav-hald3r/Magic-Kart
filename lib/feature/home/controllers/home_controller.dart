@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:get/get.dart' hide FormData;
 import 'package:magickart/common/widgets/popup.dart';
 import 'package:magickart/data/repositorys/home_repo.dart';
 import 'package:magickart/feature/product/models/product_model.dart';
+import 'package:magickart/utils/constants/enums.dart';
+import 'package:magickart/utils/constants/storage_constants.dart';
 import 'package:magickart/utils/device_util/device_util.dart';
+import 'package:magickart/utils/local_storage/local_storage.dart';
 
 class HomeController extends GetxController {
   static HomeController get instance => Get.find();
@@ -15,24 +20,30 @@ class HomeController extends GetxController {
 
   // Function to retrieve wishlist products from local storage
   Future<void> _retrieveProducts() async {
-    // final String storeData =
-    //     XLocalStorage.getData(XStorageConstant.favMods, KeyType.STR);
-    // if (storeData.isNotEmpty) {
-    //   // Split the storeData string by commas to get individual JSON strings
-    //   final List<String> jsonStrings = storeData.split('|');
+    // Start Loader
+    isWishlistLoading = true;
 
-    //   // Create a list to store decoded Mod objects
-    //   List<Mod> decodedMods = [];
+    final String storeData =
+        XLocalStorage.getData(XStorageConstant.wishlistProducts, KeyType.STR);
+    if (storeData.isNotEmpty) {
+      // Split the storeData string by commas to get individual JSON strings
+      final List<String> jsonStrings = storeData.split('|');
 
-    //   // Decode each JSON string and add the corresponding Mod object to the list
-    //   for (String jsonString in jsonStrings) {
-    //     Mod mod = Mod.fromJson(json.decode(jsonString));
-    //     decodedMods.add(mod);
-    //   }
+      // Create a list to store decoded product objects
+      List<ProductModel> decodedProducts = [];
 
-    //   // Update favMods with the decoded Mod objects
-    //   favMods = decodedMods;
-    // }
+      // Decode each JSON string and add the corresponding ProductModel object to the list
+      for (String jsonString in jsonStrings) {
+        ProductModel product = ProductModel.fromJson(json.decode(jsonString));
+        decodedProducts.add(product);
+      }
+
+      // Update wishlistProducts with the decoded ProductModel objects
+      wishlistProducts = decodedProducts;
+    }
+
+    // Stop Loader
+    isWishlistLoading = false;
   }
 
   //  ---------------------------------* Variable Start *------------------------------
@@ -42,7 +53,6 @@ class HomeController extends GetxController {
 
   final RxBool _isHomeLoading = false.obs;
   final RxBool _isWishlistLoading = false.obs;
-  final RxBool _isProductLoading = false.obs;
 
   final RxInt _page = 1.obs;
 
@@ -57,7 +67,6 @@ class HomeController extends GetxController {
 
   bool get isHomeLoading => _isHomeLoading.value;
   bool get isWishlistLoading => _isWishlistLoading.value;
-  bool get isProductLoading => _isProductLoading.value;
 
   int get page => _page.value;
 
@@ -72,7 +81,6 @@ class HomeController extends GetxController {
 
   set isHomeLoading(loading) => _isHomeLoading.value = loading;
   set isWishlistLoading(loading) => _isWishlistLoading.value = loading;
-  set isProductLoading(loading) => _isProductLoading.value = loading;
 
   set page(currentPage) => _page.value = currentPage;
 
@@ -82,29 +90,30 @@ class HomeController extends GetxController {
 
   //  ---------------------------------* Function Start *------------------------------
 
-  // // Function to update favorite mods in local storage
-  // Future<void> _updateFavMods() async {
-  //   // Encode each Mod object to JSON string
-  //   List<String> jsonModStrings =
-  //       favMods.map((mod) => json.encode(mod.toJson())).toList();
+  // Function to update favorite products in local storage
+  Future<void> _updateFavouriteProduct() async {
+    // Encode each product object to JSON string
+    List<String> jsonModStrings = wishlistProducts
+        .map((product) => json.encode(product.toJson()))
+        .toList();
 
-  //   // Join JSON strings with comma to form a single string
-  //   String joinedJson = jsonModStrings.join('|');
+    // Join JSON strings with comma to form a single string
+    String joinedJson = jsonModStrings.join('|');
 
-  //   // Save the joined JSON string to local storage
-  //   await XLocalStorage.addData(XStorageConstant.favMods, joinedJson);
-  // }
+    // Save the joined JSON string to local storage
+    await XLocalStorage.addData(XStorageConstant.wishlistProducts, joinedJson);
+  }
 
-  // // Function to toggle a mod as favorite
-  // void toggleFavorite(Mod mod) {
-  //   int index = favMods.indexWhere((e) => e.id == mod.id);
-  //   if (index != -1) {
-  //     favMods.removeWhere((e) => e.id == mod.id);
-  //   } else {
-  //     favMods.add(mod);
-  //   }
-  //   _updateFavMods();
-  // }
+  // Function to toggle a product as favorite
+  void toggleFavoriteProduct(ProductModel product) {
+    int index = wishlistProducts.indexWhere((e) => e.id == product.id);
+    if (index != -1) {
+      wishlistProducts.removeWhere((e) => e.id == product.id);
+    } else {
+      wishlistProducts.add(product);
+    }
+    _updateFavouriteProduct();
+  }
 
   // Fetch products
   Future<void> getProducts() async {

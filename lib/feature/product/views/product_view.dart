@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:magickart/feature/home/controllers/home_controller.dart';
 import 'package:magickart/feature/product/models/product_model.dart';
 
 class ProductView extends StatelessWidget {
@@ -10,6 +12,8 @@ class ProductView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = HomeController.instance;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -54,15 +58,24 @@ class ProductView extends StatelessWidget {
                         '₹${product.price ?? 0.0}',
                         style: GoogleFonts.poppins(fontSize: 16.sp),
                       ),
-                      ElevatedButton.icon(
-                        icon: Icon(
-                          Icons.favorite,
-                          size: 16.sp,
-                        ),
-                        onPressed: () {},
-                        label: Text(
-                          'Add to wishlist',
-                          style: GoogleFonts.poppins(fontSize: 12.sp),
+                      Obx(
+                        () => ElevatedButton.icon(
+                          icon: Icon(
+                            controller.wishlistProducts
+                                    .any((p) => p.id == product.id)
+                                ? Icons.thumb_down
+                                : Icons.thumb_up,
+                            size: 16.sp,
+                          ),
+                          onPressed: () =>
+                              controller.toggleFavoriteProduct(product),
+                          label: Text(
+                            controller.wishlistProducts
+                                    .any((p) => p.id == product.id)
+                                ? 'Remove'
+                                : 'Add to wishlist',
+                            style: GoogleFonts.poppins(fontSize: 12.sp),
+                          ),
                         ),
                       )
                     ],

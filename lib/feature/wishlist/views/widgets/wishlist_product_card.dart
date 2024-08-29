@@ -2,19 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:magickart/feature/home/controllers/home_controller.dart';
+import 'package:magickart/feature/product/models/product_model.dart';
 import 'package:magickart/feature/product/views/product_view.dart';
 import 'package:magickart/utils/constants/colors.dart';
 import 'package:magickart/utils/helper/navigation.dart';
 
 class WishlistProductCard extends StatelessWidget {
-  const WishlistProductCard({
-    super.key,
-  });
+  final ProductModel? product;
+  const WishlistProductCard({super.key, this.product});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigation.push(const ProductView()),
+      onTap: () {
+        HomeController.instance.isWishlistLoading
+            ? null
+            : Navigation.push(ProductView(product: product!));
+      },
       child: Container(
         width: double.infinity,
         height: 100.h,
@@ -30,7 +35,8 @@ class WishlistProductCard extends StatelessWidget {
                 bottomLeft: Radius.circular(12.r),
               ),
               child: Image.network(
-                'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
+                product?.image ??
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdDfOU2dKmC9TLY75CcD3a4PG0AjXnbaw2Jw&s',
                 width: 100.w,
                 fit: BoxFit.cover,
               ),
@@ -42,7 +48,7 @@ class WishlistProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Fjallraven - Foldsack No. 1 aghhg Backpack, Fits 15 Laptops',
+                    product?.title ?? 'This is product title',
                     maxLines: 2,
                     style: GoogleFonts.poppins(fontSize: 14.sp),
                   ),
@@ -53,18 +59,19 @@ class WishlistProductCard extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            '₹139.30',
+                            '₹${product?.price ?? 0.0}',
                             style: GoogleFonts.poppins(fontSize: 12.sp),
                           ),
                           Gap(12.w),
                           Text(
-                            '⭐ 4.1',
+                            '⭐ ${product?.rating?.rate ?? 0}',
                             style: GoogleFonts.poppins(fontSize: 12.sp),
                           ),
                         ],
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () => HomeController.instance
+                            .toggleFavoriteProduct(product!),
                         child: Icon(
                           Icons.delete,
                           size: 18.sp,

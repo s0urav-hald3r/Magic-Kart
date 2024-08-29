@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:magickart/app.dart';
 import 'package:magickart/utils/constants/colors.dart';
 
@@ -17,13 +18,13 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]);
 
+// ! Init Local Storage
+  await GetStorage.init();
+
 // ! Status bar color & Botttom Navigation bar color
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       systemNavigationBarColor: XColor.darkerGrey));
-
-// TODO: Initialize Firebase
-// TODO: Initialize Authentication
 
   runApp(const App());
 
